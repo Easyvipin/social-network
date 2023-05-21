@@ -34,7 +34,7 @@ const Modal: React.FC<IModalProps> = ({
     if (disabled) {
       return;
     }
-    onClose();
+    onSubmit();
   }, [disabled, onSubmit]);
 
   if (!isOpen) {
@@ -43,23 +43,23 @@ const Modal: React.FC<IModalProps> = ({
 
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70">
-        <div className="relative w-full lg:w-3/5 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800 bg-opacity-70 outline-none focus:outline-none">
+        <div className="relative mx-auto my-6 h-full w-full lg:h-auto lg:w-3/5 lg:max-w-3xl">
           {/*content*/}
           <div
             className="
-            h-full
-            lg:h-auto
-            border-0 
-            rounded-lg 
-            shadow-lg 
-            relative 
-            flex 
-            flex-col 
+            relative
+            flex
+            h-full 
             w-full 
+            flex-col 
+            rounded-lg 
+            border-0 
             bg-black 
+            shadow-lg 
             outline-none 
-            focus:outline-none
+            focus:outline-none 
+            lg:h-auto
             "
           >
             {/*header*/}
@@ -68,21 +68,19 @@ const Modal: React.FC<IModalProps> = ({
               flex 
               items-center 
               justify-between 
-              p-10 
-              rounded-t
+              rounded-t 
+              p-10
               "
             >
-              <h3 className="text-3xl font-semibold text-white">
-                {title}
-              </h3>
+              <h3 className="text-3xl font-semibold text-white">{title}</h3>
               <button
                 className="
+                  ml-auto 
+                  border-0
                   p-1 
-                  ml-auto
-                  border-0 
                   text-white 
-                  hover:opacity-70
                   transition
+                  hover:opacity-70
                 "
                 onClick={handleClose}
               >
@@ -90,9 +88,7 @@ const Modal: React.FC<IModalProps> = ({
               </button>
             </div>
             {/*body*/}
-            <div className="relative p-10 flex-auto">
-              {body}
-            </div>
+            <div className="relative flex-auto p-10">{body}</div>
             {/*footer*/}
             <div className="flex flex-col gap-2 p-10">
               <Button

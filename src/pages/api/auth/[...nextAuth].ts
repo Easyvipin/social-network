@@ -20,6 +20,7 @@ export default NextAuth({
         },
       },
       async authorize(credentials) {
+        console.log(credentials);
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
@@ -29,6 +30,8 @@ export default NextAuth({
           },
         });
 
+        console.log(user);
+
         if (!user || !user.hashedPassword) {
           throw new Error("Invalid credentials");
         }
@@ -36,10 +39,12 @@ export default NextAuth({
           credentials.password,
           user.hashedPassword
         );
-
+        console.log(isCorrectPassword);
         if (!isCorrectPassword) {
           throw new Error("Invalid credentials");
         }
+
+        return user;
       },
     }),
   ],

@@ -3,6 +3,9 @@ import useRegisterModal from "@src/hooks/useRegisterModal";
 import React, { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 interface IRegisterModalProps {}
 
@@ -25,15 +28,31 @@ const RegisterModal: React.FC<IRegisterModalProps> = ({}) => {
   }, [isLoading, registerModal, loginModal]);
 
   const onSubmit = useCallback(async () => {
+    console.log("called");
     try {
       setIsLoading(true);
+      await axios.post("/api/register", {
+        email,
+        password,
+        username,
+        name,
+      });
+
+      toast.success("Account created");
+
+      signIn("credentials", {
+        email,
+        password,
+      });
+
       registerModal.onClose();
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
-  }, [registerModal]);
+  }, [registerModal, email, password, username, name]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -66,11 +85,11 @@ const RegisterModal: React.FC<IRegisterModalProps> = ({}) => {
   );
 
   const footerContent = (
-    <div className="text-neutral-400 text-center mt-4">
+    <div className="mt-4 text-center text-neutral-400">
       <p>
         Already have an account ?{" "}
         <span
-          className="text-white cursor-pointer hover:underline"
+          className="cursor-pointer text-white hover:underline"
           onClick={onToggle}
         >
           Sign in

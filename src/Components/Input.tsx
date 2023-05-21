@@ -3,9 +3,7 @@ interface InputProps {
   value?: string;
   type?: string;
   disabled?: boolean;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
 }
 
@@ -20,9 +18,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <p className="text-xl text-white font-semibold mb-2">
-          {label}
-        </p>
+        <p className="mb-2 text-xl font-semibold text-white">{label}</p>
       )}
       <input
         disabled={disabled}
@@ -32,20 +28,20 @@ const Input: React.FC<InputProps> = ({
         type={type}
         className="
           w-full
-          p-4 
-          text-lg 
-          bg-black 
-          border-2
+          rounded-md 
+          border-2 
           border-neutral-800 
-          rounded-md
-          outline-none
+          bg-black
+          p-4 
+          text-lg
           text-white
-          focus:border-sky-500
-          focus:border-2
+          outline-none
           transition
+          focus:border-2
+          focus:border-sky-500
+          disabled:cursor-not-allowed
           disabled:bg-neutral-900
           disabled:opacity-70
-          disabled:cursor-not-allowed
         "
       />
     </div>

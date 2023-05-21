@@ -3,6 +3,7 @@ import useRegisterModal from "@src/hooks/useRegisterModal";
 import React, { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
+import { signIn } from "next-auth/react";
 
 interface ILoginModalProps {}
 
@@ -18,7 +19,6 @@ const LoginModal: React.FC<ILoginModalProps> = ({}) => {
     if (isLoading) {
       return;
     }
-
     loginModal.onClose();
     registerModal.onOpen();
   }, [isLoading, registerModal, loginModal]);
@@ -26,13 +26,17 @@ const LoginModal: React.FC<ILoginModalProps> = ({}) => {
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true);
+      await signIn("credentials", {
+        email,
+        password,
+      });
       loginModal.onClose();
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
-  }, [loginModal]);
+  }, [loginModal, email, password]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -53,11 +57,11 @@ const LoginModal: React.FC<ILoginModalProps> = ({}) => {
   );
 
   const footerContent = (
-    <div className="text-neutral-400 text-center mt-4">
+    <div className="mt-4 text-center text-neutral-400">
       <p>
         First time using twitter ?{" "}
         <span
-          className="text-white cursor-pointer hover:underline"
+          className="cursor-pointer text-white hover:underline"
           onClick={onToggle}
         >
           Create an account
