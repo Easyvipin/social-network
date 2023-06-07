@@ -28,7 +28,7 @@ const RegisterModal: React.FC<IRegisterModalProps> = ({}) => {
   }, [isLoading, registerModal, loginModal]);
 
   const onSubmit = useCallback(async () => {
-    console.log("called");
+    ("called");
     try {
       setIsLoading(true);
       await axios.post("/api/register", {
@@ -47,7 +47,7 @@ const RegisterModal: React.FC<IRegisterModalProps> = ({}) => {
 
       registerModal.onClose();
     } catch (error) {
-      console.log(error);
+      error;
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);

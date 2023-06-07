@@ -7,6 +7,8 @@ const useUser = (userId: string) => {
     fetcher
   );
 
+  data;
+
   return {
     data,
     error,

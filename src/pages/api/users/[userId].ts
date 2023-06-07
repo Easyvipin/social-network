@@ -27,8 +27,6 @@ export default async function handler(
       },
     });
 
-    return res.status(200).json({});
-
     return res.status(200).json({ ...existingUser, followersCount });
   } catch (error) {
     return res.status(400).end();

@@ -32,7 +32,7 @@ const LoginModal: React.FC<ILoginModalProps> = ({}) => {
       });
       loginModal.onClose();
     } catch (error) {
-      console.log(error);
+      error;
     } finally {
       setIsLoading(false);
     }
