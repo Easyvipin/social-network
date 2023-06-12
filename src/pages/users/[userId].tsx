@@ -1,3 +1,4 @@
+import PostFeed from "@src/Components/Posts/PostFeed";
 import Header from "@src/Components/layout/Header";
 import UserBio from "@src/Components/users/UserBio";
 import UserHero from "@src/Components/users/UserHero";
@@ -27,6 +28,7 @@ const UserView: React.FunctionComponent<IUserViewProps> = (props) => {
       <Header showBackArrow label={fetchedUser?.name} />
       <UserHero userId={userId as string} />
       <UserBio userId={userId as string} />
+      <PostFeed userId={userId as string} />
     </>
   );
 };

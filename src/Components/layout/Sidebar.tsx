@@ -20,7 +20,12 @@ const SideBar: React.FC<ISidebarProps> = (props) => {
       icon: BsBellFill,
       auth: true,
     },
-    { label: "Profile", href: "/users/123", icon: FaUser, auth: true },
+    {
+      label: "Profile",
+      href: `/users/${currentUser?.id}`,
+      icon: FaUser,
+      auth: true,
+    },
   ];
   return (
     <div className="col-span-1 h-full pr-4 md:pr-6">
